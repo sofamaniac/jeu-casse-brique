@@ -1,0 +1,28 @@
+Dernière modification le 02/09/2014
+
+Jeu du casse brique par sofa.
+
+Attentes du jeu :
+
+- Menu
+	- Jouer
+	- Options
+		- Redéfinir les touches
+		- Jouer avec un joystick
+		- Choisir le mode fenêtré ou le plein écran
+		- Choisir la difficulté
+	- Quitter	
+- Fenêtre redimensionnable
+- Séparer le système d'affichage du système de calculs
+- Systeme de shop, d'upgrade
+-Faire un éditeur de niveau
+
+
+Etapes du jeu :
+
+- On charge le niveau
+- On met la raquette et la balle
+- On lance le jeu
+- Quand la balle frappe une brique on détermine de façon aléatoire si on lache un power-up
+- Si la ball tombe on retire une vie au joueur.
+- Si le niveau est fini, le joueur gagne une vie

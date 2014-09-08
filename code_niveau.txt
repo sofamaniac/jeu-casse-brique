@@ -1,0 +1,15 @@
+Code niveau:
+
+g = green
+r = red
+y = yellow
+p = purple
+d = dark = black
+w = white
+b = blue
+
+\n = fin de ligne
+v = void
+
+
+la première ligne d'un niveau doit être vide pour l'affichage du score et des vies

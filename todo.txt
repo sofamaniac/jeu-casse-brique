@@ -1,0 +1,8 @@
+TODO List :
+
+	- trouver ou créer des images
+	- systemes de power_up
+	- systeme de save
+	- systeme d'upgrade
+	- systeme de shop
+	- editeur de niveau
