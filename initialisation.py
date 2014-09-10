@@ -10,65 +10,54 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from fenetre import *
+import pickle
 
-from pygame.locals import *
 
-class Raquette:
-
-	def __init__(self, image,coordonnees, deplacement=8):
+def charger_niveau(path):
 	
-		self.image = image
-		self.position = coordonnees
-		self.deplacement = deplacement
+	niveau = []
 	
-	
-	def deplacer(self, taille_l, event):
-
-		if event.key == K_LEFT:
+	with open(path, 'rb') as fichier:
 		
-			if self.position[0] - deplacement <= 0:
-			
-				self.position[0] = self.position[0] - deplacement
-				
-				
-		if event.key == K_RIGHT:
-
-			if self.position[0] + deplacement <= taille_l:
-			
-				self.position[0] = self.position[0] + deplacement
-				
-
-class Balle:
-
-		def __init__(self, image, coordonnees, deplacement=[8,8]):
+		y = 0
+		niveau.append([])
 		
-			self.image = image
-			self.position = coordonnees
-			self.deplacement = deplacement
+		for lignes in fichier:
 			
-		def deplacer(self, taille_l, taill_h)
-
-			if self.position[0] + self.deplacement[0] <= 0 or self.position[0] + self.deplacement[0] >= taille_l:
-				deplacement[0] = -deplacement[0]
+			x = 0
+			
+			for briques in lignes:
+			
+				niveau[y][x].append(Brique(image_brique, (x * taille_brique, y * taille_brique)))
+				x += 1
 				
-			if self.positon[1] + self.deplacement[1] <= 0:
-				self.deplacement[1] = -self.deplacement[1]
-				
+			y += 1	
+			
+		fichier.close()
+		
+		
+		
+def save(fichier, dico):
 
-class Brique:
+	with open(fichier,"wb") as fichier:
 	
-	def __init__(self, image, coordonnees):
+		enregistrer = pickle.Pickler(fichier)
+		
+		enregistrer.dump(dico)
+		
+		fichier.close()
+		
+		
+		
+		
+def read_save(fichier):
+
+	with open(fichier,"rb") as fichier:
 	
-		self.image = image
-		self.position = coordonnees
-		self.power_up = Power_up()
-
-				
-
-
-class Power_up:
-
-	def __init__(self):
-	
-		types = ["Barre+", "Barre-", "Balle+", "2Balle", "Vie", "ScoreX", "Score+", "Money+"]
+		reader = pickle.Unpickler(fichier)
+		
+		save = reader.load()
+		
+		fichier.close()
+		
+	return save
