@@ -9,10 +9,11 @@ Redistribution and use in source and binary forms, with or without modification,
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
+from pygame.locals import *
+from random import randrange
 
 from fenetre import *
 
-from pygame.locals import *
 
 class Raquette:
 
@@ -62,13 +63,42 @@ class Brique:
 	
 		self.image = image
 		self.position = coordonnees
-		self.power_up = Power_up()
+		self.taille = self.image.get_size()
 
-				
+		if randrange(0, 6) == 0:
+			self.power_up = Power_up()
+			
+		else:
+			self.power_up = 0
+
+class Upgrade:
+
+	def __init__(self, cout, effet):
+		
+		self.cout = cout
+		self.effet = effet
 
 
-class Power_up:
+class Power_up(Upgrade):
 
-	def __init__(self):
-	
-		types = ["Barre+", "Barre-", "Balle+", "2Balle", "Vie", "ScoreX", "Score+", "Money+"]
+	def __init__(self, durees, pos = [0,0]):
+		
+		types = {0 : self.vie(), 
+				 1 : self.barre_plus(),
+				 2 : self.barre_moins(),
+				 3 : self.balle_plus(),
+				 4 : self.deux_balles(),
+				 5 : self.score_multiplie(),
+				 6 : self.score_plus(),
+				 7 : self.money_plus()
+				 }
+		
+		self.position = pos
+		
+		nb_aleatoire = randrange(0, len(types))
+			
+		type_power_up = dico[nb_aleatoire]
+		
+		self.temps = durees[nb_aleatoire]
+
+		Upgrade.__init__(self, 0, type_power_up)

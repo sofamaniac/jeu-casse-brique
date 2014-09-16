@@ -28,7 +28,10 @@ def charger_niveau(path):
 			
 			for briques in lignes:
 			
-				niveau[y][x].append(Brique(image_brique, (x * taille_brique, y * taille_brique)))
+				if brique != "v":
+					niveau[y][x].append(Brique(image_brique, (x * Brique.taille, y * Brique.taille)))
+					
+					
 				x += 1
 				
 			y += 1	

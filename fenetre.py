@@ -111,32 +111,29 @@ def fenetre(taille_l, taille_h, titre, logo):
 	
 	
 		
-def fenetre_update(fenetre, balle, posistion_balle, raquette, position_raquette, niveau, taille_brique, score, vies):
-
-	fenetre.blit(balle, position_balle)
-	fenetre.blit(raquette, position_raquette)
-	
+def fenetre_update(fenetre, balle, raquette, niveau, score, vies, power_up):	
+		
 	taille_l = fenetre.get_width()
 	taille_h = fenetre.get_height()
 	
+	fenetre.blit(balle, balle.position)
+	fenetre.blit(raquette, raquette.position)
+	
 	afficher_text(fenetre, "score " + str(score), taille_l - 19 * len(str(score))/2, 40)
 	afficher_text(fenetre, "vies" + str(vies), 0, 40)#a remplacer par l'affichage de coeurs
+	
+	
+	for power_up in power_up:
+	
+		fenetre.blit(power_up.image, power_up.position)
+	
 	
 	
 	y = 0
 	for lignes in niveau:
 		x = 0
 		for brique in lignes:
-		
-			if brique != 'v':
-			
-				position_brique = [x*taille_brique[0], y*taille_brique[1]]
-				
-				nom_brique = "img/brique" + brique + ".png"
-				
-				image_brique = load_image(nom_brique)
-				
-				fenetre.blit(image_brique, position_brique)
+				fenetre.blit(briuqe.image, brique.position)
 				
 			x += 1	
 		y += 1
